@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HabitsTracker</string>
+    <string name="habit_name">Имя привычки</string>
+    <string name="about_habit">Краткое описание</string>
+    <string name="txt_view_add_habit">Добавление привычки</string>
+    <string name="priority_text">Приоритет:</string>
+    <string-array name="habit_priorities">
+        <item>Низкий</item>
+        <item>Средний</item>
+        <item>Большой</item>
+    </string-array>
+    <string-array name="habit_types">
+        <item>Хорошая</item>
+        <item>Плохая</item>
+    </string-array>
+</resources>

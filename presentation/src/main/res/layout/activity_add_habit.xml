@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="25dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fragmentAddHeader"
+            android:background="@drawable/cyan_gradient_45"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txt_view_add_habit"
+            android:textAlignment="center"
+            android:textColor="@color/black_overlay"
+            android:shadowColor="@color/teal_700"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="15"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentAddNameContainer"
+        style="@style/TextInputLayoutStyle"
+        android:layout_marginTop="18dp"
+        android:hint="@string/habit_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragmentAddName"
+            android:background="@drawable/cyan_gradient_45_radius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentAddAboutContainer"
+        style="@style/TextInputLayoutStyle"
+        android:hint="@string/about_habit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentAddNameContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragmentAddAbout"
+            android:background="@drawable/cyan_gradient_45_radius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/fragmentAddPriorityLabel"
+        style="@style/LabelsDefaultStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Приоритет:"
+        app:layout_constraintStart_toStartOf="@+id/fragmentAddNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentAddAboutContainer" />
+
+    <Spinner
+        android:id="@+id/fragmentAddPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:entries="@array/habit_priorities"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentAddPriorityLabel"
+        app:layout_constraintStart_toEndOf="@+id/fragmentAddPriorityLabel"
+        app:layout_constraintTop_toTopOf="@+id/fragmentAddPriorityLabel" />
+
+    <TextView
+        android:id="@+id/fragmentAddTypeLabel"
+        style="@style/LabelsDefaultStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Тип привычки:"
+        app:layout_constraintStart_toStartOf="@+id/fragmentAddNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentAddPriority" />
+
+    <RadioGroup
+        android:id="@+id/fragmentAddPriorityRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentAddTypeLabel"
+        app:layout_constraintStart_toEndOf="@+id/fragmentAddTypeLabel"
+        app:layout_constraintTop_toTopOf="@+id/fragmentAddTypeLabel">
+
+        <RadioButton
+            android:id="@+id/fragmentAddGoodRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Хороший" />
+
+        <RadioButton
+            android:id="@+id/fragmentAddBadRadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Плохой" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/fragmentAddColorLabel"
+        style="@style/LabelsDefaultStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите цвет:"
+        app:layout_constraintStart_toStartOf="@+id/fragmentAddNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentAddTypeLabel" />
+
+    <ImageView
+        android:id="@+id/fragmentAddColorCircle"
+        android:layout_width="35dp"
+        android:elevation="3dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentAddColorLabel"
+        app:layout_constraintStart_toEndOf="@+id/fragmentAddColorLabel"
+        app:layout_constraintTop_toTopOf="@id/fragmentAddColorLabel" />
+
+    <TextView
+        android:id="@+id/fragmentAddDateLabel"
+        style="@style/LabelsDefaultStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Укажите дату:"
+        app:layout_constraintStart_toStartOf="@id/fragmentAddNameContainer"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentAddColorLabel" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fragmentAddCalendarContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentAddDateLabel"
+        app:layout_constraintEnd_toEndOf="@id/fragmentAddColorCircle"
+        app:layout_constraintStart_toStartOf="@id/fragmentAddColorCircle"
+        app:layout_constraintTop_toTopOf="@id/fragmentAddDateLabel">
+
+        <ImageView
+            android:id="@+id/fragmentAddCalendarImg"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/calendar_icon"
+            android:backgroundTint="@color/teal_700"
+            android:elevation="3dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/fragmentAddFirstDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/fragmentAddCalendarContainer"
+        app:layout_constraintTop_toTopOf="@+id/fragmentAddCalendarContainer"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentAddCalendarContainer"/>
+
+    <View
+        android:id="@+id/fragmentAddDateSeparator"
+        android:layout_width="6dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/separator"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentAddFirstDate"
+        app:layout_constraintStart_toEndOf="@+id/fragmentAddFirstDate"
+        app:layout_constraintTop_toTopOf="@+id/fragmentAddFirstDate" />
+
+    <TextView
+        android:id="@+id/fragmentAddSecondDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/fragmentAddDateSeparator"
+        app:layout_constraintTop_toTopOf="@+id/fragmentAddDateSeparator"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentAddDateSeparator"/>
+
+    <Button
+        android:id="@+id/fragmentAddOkBtn"
+        style="@style/ButtonDefaultTeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="12dp"
+        android:minWidth="150dp"
+        android:text="Добавить"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/fragmentAddCloseBtn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="12dp"
+        android:minWidth="100dp"
+        android:text="Отмена"
+        android:textColor="@color/default_teal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
