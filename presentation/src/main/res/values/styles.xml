@@ -36,4 +36,9 @@
     <style name="ButtonDefaultTeal" parent="@style/Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/default_teal</item>
     </style>
+
+    <style name="CircleButton" parent="@style/Widget.MaterialComponents.Button">
+        <item name="background">@drawable/circle</item>
+        <item name="backgroundTint">@color/default_teal_50_opacity</item>
+    </style>
 </resources>

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Transformation
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +25,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.example.extensions.observe
 import com.example.habitstracker.fabric.MainViewModelFactory
+import com.example.habitstracker.viewholders.MainViewHolder
+import com.google.android.material.transition.MaterialArcMotion
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Dispatcher
 
@@ -45,6 +50,13 @@ class MainFragment : Fragment() {
         setFabListener()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        exitTransition = MaterialElevationScale(false)
+        reenterTransition = MaterialElevationScale(false)
+    }
+
     private fun setupTabLayout() {
         val viewPager = requireView().findViewById<ViewPager>(R.id.mainFragmentViewPager)
         viewPager?.adapter = MainPagerAdapter(childFragmentManager)
@@ -55,7 +67,11 @@ class MainFragment : Fragment() {
     private fun setFabListener() {
         requireView().findViewById<FloatingActionButton>(R.id.mainFragmentFab).setOnClickListener {
 
+            val addHabitFragment = AddHabitFragment()
+            addHabitFragment.sharedElementEnterTransition = MaterialArcMotion()
+
             parentFragmentManager.beginTransaction()
+                .addSharedElement(requireView(), "shared_element_container")
                 .replace(R.id.container, AddHabitFragment())
                 .addToBackStack(null)
                 .commit()

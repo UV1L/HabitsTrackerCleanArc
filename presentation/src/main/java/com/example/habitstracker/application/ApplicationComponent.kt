@@ -1,18 +1,20 @@
 package com.example.habitstracker.application
 
 import android.app.Application
-import com.example.data.MainRepositoryImpl
+import android.content.Context
+import androidx.room.Room
+import com.example.data.HabitsRepositoryImpl
 import com.example.data.RetrofitService
+import com.example.data.db.HabitDb
 import com.example.data.type_adapters.HabitAdapter
-import com.example.domain.MainUseCase
-import com.example.domain.MainUseCaseImpl
+import com.example.domain.AddHabitsUseCase
+import com.example.domain.AddHabitsUseCaseImpl
 import com.example.domain.entities.Habit
-import com.example.habitstracker.MainActivity
 import com.google.gson.GsonBuilder
+import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import dagger.internal.DaggerGenerated
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -21,13 +23,13 @@ import javax.inject.Singleton
 class ProviderModule {
 
     @Provides
-    fun provideMainUseCase(mainRepository: MainRepositoryImpl): MainUseCase {
-        return MainUseCaseImpl(mainRepository)
+    fun provideMainUseCase(mainRepository: HabitsRepositoryImpl): AddHabitsUseCase {
+        return AddHabitsUseCaseImpl(mainRepository)
     }
 
     @Provides
-    fun provideMainRepository(retrofitService: RetrofitService): MainRepositoryImpl {
-        return MainRepositoryImpl(retrofitService)
+    fun provideMainRepository(retrofitService: RetrofitService, db: HabitDb): HabitsRepositoryImpl {
+        return HabitsRepositoryImpl(retrofitService, db)
     }
 
     @Provides
@@ -49,13 +51,32 @@ class ProviderModule {
 
         return retrofit
     }
+
+    @Singleton
+    @Provides
+    fun provideHabitDao(context: Context): HabitDb =
+        Room.databaseBuilder(
+            context,
+            HabitDb::class.java, HabitDb.NAME
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 }
 
 @Singleton
-@Component(modules= [ProviderModule::class])
+@Component(modules = [ProviderModule::class])
 interface ApplicationComponent {
 
-    fun inject(): MainUseCase
+    fun inject(): AddHabitsUseCase
+
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun setContext(context: Context): Builder
+
+        fun build(): ApplicationComponent
+    }
 }
 
 class MyApplication : Application() {
@@ -65,6 +86,9 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        applicationComponent = DaggerApplicationComponent.create()
+        applicationComponent = DaggerApplicationComponent
+            .builder()
+            .setContext(applicationContext)
+            .build()
     }
 }

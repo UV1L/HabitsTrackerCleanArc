@@ -1,31 +1,39 @@
 package com.example.habitstracker.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import com.example.domain.entities.Habit
-import com.example.domain.MainUseCase
+import com.example.domain.AddHabitsUseCase
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
-class MainViewModel(private val mainUseCase: MainUseCase) : ViewModel() {
+class MainViewModel(private val addHabitsUseCase: AddHabitsUseCase) : ViewModel() {
 
-    private val _habits: MutableLiveData<List<Habit>> = MutableLiveData()
-    val habits: LiveData<List<Habit>> = _habits
+    val habits: LiveData<List<Habit>> = addHabitsUseCase.data.asLiveData()
 
-    fun load() {
-        _habits.value = mainUseCase.start().asLiveData().value
+    fun load(habit: Habit) {
+
+        viewModelScope.launch {
+
+            addHabitsUseCase.execute(habit)
+        }
     }
 
+    fun updateHabit(oldHabit: Habit, newHabit: Habit) {
+
+        viewModelScope.launch {
+
+            addHabitsUseCase.update(oldHabit, newHabit)
+        }
+    }
+
+    @Deprecated("пока не нужно")
     suspend fun addHabit(habit: Habit) {
 
         withContext(currentCoroutineContext()) {
 
-            val currentValue = _habits.value
-            _habits.postValue(
-                currentValue?.plus(habit) ?: listOf(habit)
-            )
+//            val currentValue = _habits.value
+//            _habits.postValue(
+//                currentValue?.plus(habit) ?: listOf(habit)
+//            )
         }
     }
 }

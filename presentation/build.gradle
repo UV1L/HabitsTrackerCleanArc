@@ -50,11 +50,17 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.38.1'
     kapt 'com.google.dagger:dagger-android-processor:2.38.1'
 
+    //room
+    def room_version = '2.2.4'
+    implementation "androidx.room:room-ktx:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt("androidx.room:room-compiler:$room_version")
+
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
 
     //design
-    implementation "com.android.support:design:26.1.0"
+    implementation 'com.google.android.material:material:1.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.21'

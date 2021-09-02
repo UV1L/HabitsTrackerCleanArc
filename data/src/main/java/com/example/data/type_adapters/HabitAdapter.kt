@@ -5,7 +5,6 @@ import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
-import java.util.*
 
 class HabitAdapter : TypeAdapter<Habit>() {
 
@@ -16,9 +15,9 @@ class HabitAdapter : TypeAdapter<Habit>() {
 
             value?.let {
                 name("title").value(
-                    when(it.name) {
+                    when (it.title) {
                         null -> "empty"
-                        else -> it.name
+                        else -> it.title
                     }
                 )
             }
@@ -45,9 +44,9 @@ class HabitAdapter : TypeAdapter<Habit>() {
         }
         `in`?.endObject()
 
-        return when(title) {
-            null -> Habit("empty", "empty", "empty", "empty", 0)
-            else -> Habit(title, "empty", "empty", "empty", 0)
+        return when (title) {
+            null -> Habit("empty", "empty", 0, 0, 0, 0, 0)
+            else -> Habit(title, "empty", 0, 0, 0, 0, 0)
         }
     }
 }

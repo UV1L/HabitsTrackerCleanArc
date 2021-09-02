@@ -10,9 +10,8 @@ class MainPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
 
     override fun getCount(): Int = 2
 
-    override fun getItem(position: Int): Fragment {
-        return RecyclerViewFragment()
-    }
+    override fun getItem(position: Int): Fragment =
+        RecyclerViewFragment(position)
 
     override fun getPageTitle(position: Int): CharSequence {
         return when(position) {
