@@ -55,9 +55,8 @@ class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
             .applicationComponent
             .inject()
 
-        viewModel = ViewModelProvider(requireActivity(), MainViewModelFactory(mainUseCase)).get(
-            MainViewModel::class.java
-        )
+        viewModel = ViewModelProvider(requireActivity(), MainViewModelFactory(mainUseCase))
+            .get(MainViewModel::class.java)
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)

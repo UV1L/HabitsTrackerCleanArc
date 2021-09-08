@@ -23,12 +23,12 @@ import javax.inject.Singleton
 class ProviderModule {
 
     @Provides
-    fun provideMainUseCase(mainRepository: HabitsRepositoryImpl): AddHabitsUseCase {
+    fun provideHabitsUseCase(mainRepository: HabitsRepositoryImpl): AddHabitsUseCase {
         return AddHabitsUseCaseImpl(mainRepository)
     }
 
     @Provides
-    fun provideMainRepository(retrofitService: RetrofitService, db: HabitDb): HabitsRepositoryImpl {
+    fun provideHabitsRepository(retrofitService: RetrofitService, db: HabitDb): HabitsRepositoryImpl {
         return HabitsRepositoryImpl(retrofitService, db)
     }
 
