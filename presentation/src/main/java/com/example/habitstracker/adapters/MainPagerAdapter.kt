@@ -3,8 +3,7 @@ package com.example.habitstracker.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.habitstracker.ui.main.MainFragment
-import com.example.habitstracker.ui.main.RecyclerViewFragment
+import com.example.habitstracker.ui.main.recycler_view.RecyclerViewFragment
 
 class MainPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 

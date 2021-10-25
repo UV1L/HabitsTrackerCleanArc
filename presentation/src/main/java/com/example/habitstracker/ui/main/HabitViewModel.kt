@@ -5,7 +5,7 @@ import com.example.domain.entities.Habit
 import com.example.domain.AddHabitsUseCase
 import kotlinx.coroutines.*
 
-class MainViewModel(private val addHabitsUseCase: AddHabitsUseCase) : ViewModel() {
+class HabitViewModel(private val addHabitsUseCase: AddHabitsUseCase) : ViewModel() {
 
     val habits: LiveData<List<Habit>> = addHabitsUseCase.data.asLiveData()
 

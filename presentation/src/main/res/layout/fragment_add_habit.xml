@@ -2,57 +2,56 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="25dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fragmentAddHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/lato_light"
+            android:gravity="center"
+            android:text="@string/txt_view_add_habit"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+    </androidx.cardview.widget.CardView>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fragment_add_habit_button_container">
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_habit_button_container"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:paddingBottom="20dp"
             android:transitionName="shared_element_container">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="25dp"
-                app:cardElevation="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/fragmentAddHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/cyan_gradient_45"
-                    android:gravity="center"
-                    android:shadowColor="@color/teal_700"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="15"
-                    android:text="@string/txt_view_add_habit"
-                    android:textAlignment="center"
-                    android:textColor="@color/black_overlay"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragmentAddTitleContainer"
                 style="@style/TextInputLayoutStyle"
-                android:layout_marginTop="18dp"
                 android:hint="@string/habit_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragmentAddTitle"
@@ -121,6 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
+                    android:buttonTint="@color/gray"
                     android:text="Хороший" />
 
                 <RadioButton
@@ -129,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
+                    android:buttonTint="@color/gray"
                     android:text="Плохой" />
             </RadioGroup>
 
@@ -177,7 +178,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:background="@color/white"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textAlignment="center" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -185,6 +187,7 @@
                 style="@style/LabelsDefaultStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
                 android:text="Укажите количество выполнений:"
                 app:layout_constraintStart_toStartOf="@id/fragmentAddTitleContainer"
                 app:layout_constraintTop_toBottomOf="@id/fragmentAddPeriodContainer" />
@@ -205,7 +208,8 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:background="@color/white"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textAlignment="center" />
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -216,38 +220,38 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@drawable/shadow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fragment_add_habit_button_container"/>
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_habit_button_container" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_add_habit_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:outlineProvider="bounds"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
         <Button
             android:id="@+id/fragmentAddOkBtn"
-            style="@style/ButtonDefaultTeal"
+            style="@style/ButtonDefaultGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="12dp"
             android:minWidth="150dp"
             android:text="Добавить"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/fragmentAddCloseBtn"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:id="@+id/fragmentAddCancelBtn"
+            style="@style/OutlinedButtonGray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginBottom="12dp"
             android:minWidth="100dp"
             android:text="Отмена"
-            android:textColor="@color/default_teal"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
