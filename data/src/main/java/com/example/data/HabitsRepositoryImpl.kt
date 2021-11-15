@@ -4,10 +4,9 @@ import com.example.data.db.HabitDb
 import com.example.data.db.entities.HabitEntityMapper
 import com.example.domain.entities.Habit
 import com.example.domain.HabitsRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class HabitsRepositoryImpl(private val retrofitService: RetrofitService,
                            habitDb: HabitDb
@@ -20,7 +19,7 @@ class HabitsRepositoryImpl(private val retrofitService: RetrofitService,
 
     override suspend fun addHabit(habit: Habit) {
 
-        GlobalScope.launch(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
 
             val habitEntity = HabitEntityMapper.getHabitEntity(habit)
             habitDao.insert(habitEntity)
@@ -33,7 +32,7 @@ class HabitsRepositoryImpl(private val retrofitService: RetrofitService,
 
     override suspend fun updateHabit(oldHabit: Habit, newHabit: Habit) {
 
-        GlobalScope.launch(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
 
             val uid = findHabitId(oldHabit)
             val habitEntity = HabitEntityMapper.getHabitEntity(newHabit, uid)
