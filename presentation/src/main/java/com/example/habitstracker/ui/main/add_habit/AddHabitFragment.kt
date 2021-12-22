@@ -1,5 +1,6 @@
 package com.example.habitstracker.ui.main
 
+import android.content.res.ColorStateList
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.os.Build
@@ -23,6 +24,14 @@ import com.example.habitstracker.fabric.MainViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
 import dev.sasikanth.colorsheet.ColorSheet
 import java.lang.ref.WeakReference
+import androidx.core.graphics.drawable.DrawableCompat
+
+import android.graphics.drawable.Drawable
+
+import androidx.appcompat.content.res.AppCompatResources
+
+
+
 
 class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
 
@@ -81,7 +90,6 @@ class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    @RequiresApi(Build.VERSION_CODES.Q)
     private fun onRestoreInstanceState() {
 
         binding.fragmentAddDescription.text =
@@ -95,8 +103,7 @@ class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
         binding.fragmentAddCountEditTxt.text =
             SpannableStringBuilder(count.toString())
 
-        binding.fragmentAddColorCircle.background.colorFilter =
-            BlendModeColorFilter(selectedColor!!, BlendMode.SRC_ATOP)
+        setColor(binding.fragmentAddColorCircle)
 
         val typeRadioGroup = binding.fragmentAddTypeRadioGroup
         when (type) {
@@ -114,7 +121,6 @@ class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
         prioritySpinner.setSelection(selection)
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     private fun setListeners() {
 
         setTextInputListeners()
@@ -174,7 +180,6 @@ class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     private fun setColorPicker() {
 
         val colors = resources.getIntArray(R.array.colors)
@@ -193,10 +198,9 @@ class AddHabitFragment(private val habit: Habit? = null) : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     private fun setColor(circle: ImageView) {
 
-        circle.background.colorFilter = BlendModeColorFilter(selectedColor!!, BlendMode.SRC_ATOP)
+        circle.backgroundTintList = ColorStateList.valueOf(selectedColor!!)
     }
 
     private fun setOkBtnListener() {
